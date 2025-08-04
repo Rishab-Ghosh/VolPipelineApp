@@ -27,7 +27,6 @@ A comprehensive financial volatility analysis pipeline built with Streamlit for 
 - **ZIP Downloads**: Organized package downloads
 - **Combined Exports**: Multiple formats in single download
 
-## 🚀 Quick Start
 
 ### **Prerequisites**
 ```bash
@@ -52,7 +51,7 @@ pip install -r requirements.txt
    streamlit run app.py
    ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 VolPipelineStreamlit/
@@ -100,7 +99,7 @@ VolPipelineStreamlit/
 - Select format (Excel, PNG, or Both)
 - Download organized ZIP packages
 
-## 📊 Supported Curves
+## Supported Curves
 
 - NYMEX
 - HSC
@@ -129,7 +128,7 @@ VolPipelineStreamlit/
 - SOCAL
 - AECO
 
-## 🛠️ Configuration
+## Config
 
 ### **Streamlit Configuration**
 The app is configured for large file uploads (up to 1GB) in `.streamlit/config.toml`:
@@ -150,8 +149,6 @@ textColor = "#262730"
 - **File naming**: YYYYMMDD format for date extraction
 - **Data structure**: Compatible with implied volatility surface calculations
 
-## 📈 Features in Detail
-
 ### **Implied Volatility Surface**
 - 3D surface visualization using Plotly
 - Moneyness conversion for Call/Put options
@@ -170,28 +167,12 @@ textColor = "#262730"
 - Shock visualization and identification
 - Trend analysis capabilities
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
+## Stack
 
 - Built with [Streamlit](https://streamlit.io/) for web application framework
 - Data visualization powered by [Plotly](https://plotly.com/)
 - Financial data processing with [Pandas](https://pandas.pydata.org/)
 - Mathematical computations with [NumPy](https://numpy.org/)
-
-## 📞 Support
-
-For questions, issues, or feature requests, please open an issue on GitHub or contact the development team.
 
 ---
 
