@@ -13,7 +13,7 @@ def build_vol_time_series(input_folder, iv_surface_folder, output_folder, curve_
     
     # === STEP 1: Collect and combine all data ===
     all_data = []
-    
+
     for root, _, files in os.walk(input_folder):
         for file in files:
             if not file.endswith(".csv"):
@@ -41,7 +41,7 @@ def build_vol_time_series(input_folder, iv_surface_folder, output_folder, curve_
                     df['date'] = pd.to_datetime(df['Curve_Date'], errors='coerce')
                 else:
                     continue
-                
+
                 # Apply date filtering if specified
                 if start_date and end_date:
                     start = pd.to_datetime(start_date)
@@ -89,7 +89,7 @@ def build_vol_time_series(input_folder, iv_surface_folder, output_folder, curve_
     min_periods = min(rolling_window, len(pivot), 10)
     rolling = pivot.rolling(window=rolling_window, min_periods=min_periods).mean()
     daily_change = rolling.diff()
-    
+
     # Debug: Print rolling window info
     print(f"Applied {rolling_window}-day rolling window to {len(pivot)} data points")
     print(f"Rolling average range: {rolling.min().iloc[0]:.4f} to {rolling.max().iloc[0]:.4f}")
@@ -98,12 +98,12 @@ def build_vol_time_series(input_folder, iv_surface_folder, output_folder, curve_
     # === STEP 5: Save consolidated Excel file ===
     period_label = month if month else f"{curve_name}_combined"
     output_file = os.path.join(output_folder, f"{curve}_{period_label}_time_series.xlsx")
-    
+
     with pd.ExcelWriter(output_file) as writer:
         pivot.to_excel(writer, sheet_name="Original_TS")
         rolling.to_excel(writer, sheet_name=f"Rolling_{rolling_window}D")
         daily_change.to_excel(writer, sheet_name="Daily_Change")
-    
+
     # === STEP 6: Create consolidated plots ===
     if 'Contract_Month' not in combined_df.columns:
         # EWMA data - create one consolidated plot
@@ -127,7 +127,7 @@ def build_vol_time_series(input_folder, iv_surface_folder, output_folder, curve_
         plot_path = os.path.join(output_folder, f"{curve}_{period_label}_timeseries_rolling.png")
         plt.savefig(plot_path, dpi=150, bbox_inches='tight')
         plt.close()
-        
+
         # Create consolidated daily change plot
         fig, ax = plt.subplots(figsize=(15, 6))
         ax.plot(daily_change.index, daily_change['EWMA_Volatility'], label='Daily ΔVol', color='red', linewidth=1)
@@ -141,8 +141,8 @@ def build_vol_time_series(input_folder, iv_surface_folder, output_folder, curve_
         plt.close()
         
     else:
-        # Surface data - limit to first 3 contract months for speed
-        contract_months = pivot.columns[:3]  # Only process first 3
+        # Surface data - process all contract months
+        contract_months = pivot.columns  # Process all months, not just first 3
         
         for contract_month in contract_months:
             # Create matplotlib plots
